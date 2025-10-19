@@ -792,7 +792,7 @@ wheels = [
 ]
 
 [[package]]
-name = "qiskit-experiments"
+name = "qrng"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

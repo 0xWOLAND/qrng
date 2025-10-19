@@ -1,11 +1,11 @@
 v1:
-    uv run naiive.py
+    uv run src/qrng/naiive.py
 
 v2:
-    uv run anticontrol.py
+    uv run src/qrng/anticontrol.py
 
 v3:
-    uv run complement.py
+    uv run src/qrng/complement.py
 
 v4:
-    uv run main.py
+    uv run src/qrng/main.py
