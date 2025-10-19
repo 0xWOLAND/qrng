@@ -54,7 +54,7 @@ def random_sample(N: int) -> QuantumCircuit:
     return qc
 
 if __name__ == "__main__":
-    N = 33
+    N = 9
     qc = random_sample(N)
     qc.measure_all()
 

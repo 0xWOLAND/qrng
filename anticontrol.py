@@ -29,11 +29,12 @@ def random_sample(N: int) -> QuantumCircuit:
             if t == 0:
                 qc.ry(theta, 0)
             else:
-                # Control directly on the prefix pattern p via ctrl_state
                 ctrl_qubits = list(range(t))
                 target = t
-                ctrl_state = ''.join(str(bit) for bit in p)  # e.g. p=(0,1) -> "01"
-                qc.append(RYGate(theta).control(t, ctrl_state=ctrl_state),
+                # Qiskit expects ctrl_state little-endian w.r.t. ctrl_qubits:
+                # first control corresponds to LSB of ctrl_state.
+                ctrl_state_int = int(''.join(str(bit) for bit in p)[::-1], 2)
+                qc.append(RYGate(theta).control(t, ctrl_state=ctrl_state_int),
                           ctrl_qubits + [target])
 
     return qc

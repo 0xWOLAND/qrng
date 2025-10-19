@@ -33,7 +33,7 @@ def uniform_first_N(N):
     return qc
 
 if __name__ == "__main__":
-    N = 7
+    N = 6
     qc = uniform_first_N(N)
     qc.measure_all()
     qc.draw('mpl').savefig("circuit.png", dpi=300)
