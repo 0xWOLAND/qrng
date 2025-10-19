@@ -46,7 +46,7 @@ def random_sample(N: int) -> QuantumCircuit:
     return qc
 
 
-N = 7
+N = 6
 qc = random_sample(N)
 qc.measure_all()
 qc.draw('mpl').savefig("circuit.png", dpi=300)
