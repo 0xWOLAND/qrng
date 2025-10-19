@@ -1,7 +1,7 @@
 [project]
-name = "qiskit-experiments"
+name = "qrng"
 version = "0.1.0"
-description = "Add your description here"
+description = "Quantum Random Number Generator"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
