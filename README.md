@@ -1,4 +1,4 @@
-# Quantum RNG
+# Quantum RNG [![Lint](https://github.com/0xWOLAND/qrng/actions/workflows/lint.yml/badge.svg)](https://github.com/0xWOLAND/qrng/actions/workflows/lint.yml)
 
 # Prompt
 ![Prompt](./images/prompt.png)
