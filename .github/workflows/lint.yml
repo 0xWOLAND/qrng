@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: astral-sh/setup-uv@v3
-      - run: uv pip install --system ruff black
-      - run: uv run ruff check .
-      - run: uv run black --check .
+      - uses: astral-sh/ruff-action@v1
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: pip install mypy
+      - run: mypy .
