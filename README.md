@@ -77,8 +77,6 @@ $$\Delta\theta = -0.891 \text{ rad}.$$
 
 In this version, instead of explicitly using control and anti-control gates to adjust every possible branch of the power-of-two subcircuits, we exploit the symmetry of the balanced tree. Each Hadamard gate naturally produces an even split between its 0 and 1 branches, so by cascading only $\log N$ Hadamards, we implicitly generate all balanced subtrees without enumerating them. The remaining corrections are then applied only where the ideal 50–50 split fails (i.e., at boundaries of the valid $N$ range).
 
-This reduces the number of multi-controlled operations exponentially—from one per prefix to one per level—making the circuit far more compact and scalable while preserving exact amplitude ratios.
-
 
 # Open Question
 
