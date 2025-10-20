@@ -6,12 +6,14 @@ from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
 import naiive, anticontrol, complement, main, exhaustive  # import exhaustive
 
+
 class Version(Enum):
     V0 = auto()  # new version
     V1 = auto()
     V2 = auto()
     V3 = auto()
     V4 = auto()
+
 
 CIRCUIT_GENERATORS = {
     Version.V0: exhaustive.random_sample,  # use exhaustive version
@@ -20,6 +22,7 @@ CIRCUIT_GENERATORS = {
     Version.V3: complement.random_sample,
     Version.V4: main.uniform_first_N,
 }
+
 
 def run_simulation(N, version, shots):
     os.makedirs("images", exist_ok=True)
@@ -30,8 +33,9 @@ def run_simulation(N, version, shots):
     hist_name = f"images/histogram_{version.name.lower()}.png"
 
     try:
-        qc.draw('mpl').savefig(img_name, dpi=300)
-    except: pass
+        qc.draw("mpl").savefig(img_name, dpi=300)
+    except:
+        pass
 
     sim = AerSimulator()
     qc_opt = transpile(qc, sim, optimization_level=3 if version != Version.V1 else 0)
@@ -45,10 +49,13 @@ def run_simulation(N, version, shots):
     for s, c in sorted(counts.items(), key=lambda x: int(x[0][::-1], 2)):
         print(f"{int(s[::-1], 2):2d}: {c}")
 
+
 if __name__ == "__main__":
     p = argparse.ArgumentParser()
-    p.add_argument("N", type=int, nargs='?', default=9)
-    p.add_argument("version", choices=["v0","v1","v2","v3","v4"], nargs='?', default="v4")  # add v0
+    p.add_argument("N", type=int, nargs="?", default=9)
+    p.add_argument(
+        "version", choices=["v0", "v1", "v2", "v3", "v4"], nargs="?", default="v4"
+    )  # add v0
     p.add_argument("--shots", type=int, default=5000)
     args = p.parse_args()
     run_simulation(args.N, Version[args.version.upper()], args.shots)

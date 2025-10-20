@@ -3,6 +3,7 @@ from qiskit import QuantumCircuit
 from qiskit_aer import AerSimulator
 import matplotlib.pyplot as plt
 
+
 def random_sample(N: int) -> QuantumCircuit:
     k = N - 1  # Number of qubits
     qc = QuantumCircuit(k)
@@ -15,9 +16,10 @@ def random_sample(N: int) -> QuantumCircuit:
             qc.ry(theta, i)
         else:
             # Controlled rotation on previous qubit (nested 2-qubit control)
-            qc.cry(theta, i-1, i)
-    
+            qc.cry(theta, i - 1, i)
+
     return qc
+
 
 if __name__ == "__main__":
     N = 9
@@ -25,7 +27,7 @@ if __name__ == "__main__":
     qc.measure_all()
 
     # Draw and save as picture
-    fig = qc.draw('mpl', fold=0)
+    fig = qc.draw("mpl", fold=0)
     fig.savefig("circuit.png", dpi=300)
     plt.close(fig)  # Close figure to free memory
 
