@@ -75,10 +75,15 @@ $$\Delta\theta = -0.891 \text{ rad}.$$
 
 ![V4 Image](./images/v4.png)
 
-In this version, instead of explicitly using control and anti-control gates to adjust every possible branch of the power-of-two subcircuits, we exploit the symmetry of the balanced tree. Each Hadamard gate naturally produces an even split between its 0 and 1 branches, so by cascading only $\log N$ Hadamards, we implicitly generate all balanced subtrees without enumerating them. The remaining corrections are then applied only where the ideal 50–50 split fails (i.e., at boundaries of the valid $N$ range).
+To build a uniform quantum state over $0 \ldots N-1$, we basically follow the binary expansion of $N$. Each power of two, $2^j$, is like a "block" of evenly distributed states, and you only need $j$ Hadamards to generate it, since each Hadamard doubles your reach. So if $N=9=8+1$, you use three
+Hadamards to cover the first eight states and then just patch in the last one. The key idea is that you don't brute-force all $N$ outcomes --  you
+reuse the structure of powers of two to get there in about $\log N$ steps, with a few small corrections at the end to make everything line up
+perfectly.
 
+# Exercise (for fun)
 
-# Open Question
+Let $k = \lceil \log_2 N \rceil$ and $D = 2^k - N$.
 
-The complement approach scales roughly linearly with the number of invalid states, requiring $O(2^k - N)$ correction gates. This makes it ideal when $N$ is just below a power of two, since only a few amplitudes need to be removed. However, as $N$ moves further away from $2^k$, that linear term grows toward $O(2^k)$, quickly becoming inefficient. In contrast, the Hadamard tree method has logarithmic scaling—about $O(\log N)$ Hadamards and $O(\log N)$ corrections—independent of how far $N$ is from $2^k$. Thus, the complement approach is best for $N \approx 2^k$, while the Hadamard tree approach is superior for smaller $N$. A future direction is to investigate the bounds on the number of gates and when which approach is better than the other. 
-
+Estimate when the complement approach (cost $O(D)$)
+becomes less efficient than the Hadamard tree method (cost
+$O(\log N)$).
