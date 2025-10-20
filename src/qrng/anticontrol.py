@@ -4,25 +4,32 @@ from qiskit import QuantumCircuit, transpile
 from qiskit.circuit.library import RYGate
 from qiskit_aer import AerSimulator
 
+
 def random_sample(N: int) -> QuantumCircuit:
     k = math.ceil(math.log2(N))
     qc = QuantumCircuit(k)
 
     def count(N, k, p):
-        t = len(p); v = 0
-        for b in p: v = (v << 1) | b
+        t = len(p)
+        v = 0
+        for b in p:
+            v = (v << 1) | b
         span = 1 << (k - t)
-        lo = v << (k - t); hi = lo + span - 1
-        if lo >= N: return 0
+        lo = v << (k - t)
+        hi = lo + span - 1
+        if lo >= N:
+            return 0
         return max(0, min(N, hi + 1) - lo)
 
     for t in range(k):
         for p in product([0, 1], repeat=t):
             c = count(N, k, p)
-            if c == 0: continue
+            if c == 0:
+                continue
             c0 = count(N, k, p + (0,))
             c1 = c - c0
-            if c0 == 0 or c1 == 0: continue
+            if c0 == 0 or c1 == 0:
+                continue
 
             theta = 2 * math.acos((c0 / c) ** 0.5)
 
@@ -33,18 +40,21 @@ def random_sample(N: int) -> QuantumCircuit:
                 target = t
                 # Qiskit expects ctrl_state little-endian w.r.t. ctrl_qubits:
                 # first control corresponds to LSB of ctrl_state.
-                ctrl_state_int = int(''.join(str(bit) for bit in p)[::-1], 2)
-                qc.append(RYGate(theta).control(t, ctrl_state=ctrl_state_int),
-                          ctrl_qubits + [target])
+                ctrl_state_int = int("".join(str(bit) for bit in p)[::-1], 2)
+                qc.append(
+                    RYGate(theta).control(t, ctrl_state=ctrl_state_int),
+                    ctrl_qubits + [target],
+                )
 
     return qc
+
 
 if __name__ == "__main__":
     N = 9
     qc = random_sample(N)
     qc.measure_all()
     try:
-        qc.draw('mpl').savefig("circuit.png", dpi=300)
+        qc.draw("mpl").savefig("circuit.png", dpi=300)
     except Exception:
         pass
 

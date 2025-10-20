@@ -46,18 +46,18 @@ def random_sample(N: int) -> QuantumCircuit:
     return qc
 
 
-N = 6
-qc = random_sample(N)
-qc.measure_all()
-qc.draw('mpl').savefig("circuit.png", dpi=300)
+# N = 6
+# qc = random_sample(N)
+# qc.measure_all()
+# qc.draw('mpl').savefig("circuit.png", dpi=300)
 
 
-sim = AerSimulator()
-job = sim.run(transpile(qc, sim), shots=5000)
-counts = job.result().get_counts()
+# sim = AerSimulator()
+# job = sim.run(transpile(qc, sim), shots=5000)
+# counts = job.result().get_counts()
 
-print("Measurement counts:")
-for state, c in sorted(
-    counts.items(), key=lambda x: int(x[0][::-1], 2)
-):  # reverse bitstring
-    print(f"{int(state[::-1], 2):2d}: {c}")
+# print("Measurement counts:")
+# for state, c in sorted(
+#     counts.items(), key=lambda x: int(x[0][::-1], 2)
+# ):  # reverse bitstring
+#     print(f"{int(state[::-1], 2):2d}: {c}")
