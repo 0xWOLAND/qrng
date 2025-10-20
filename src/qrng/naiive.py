@@ -2,8 +2,6 @@ import math
 from itertools import product
 from qiskit import QuantumCircuit
 from qiskit.circuit.library import RYGate
-from qiskit_aer import AerSimulator
-from qiskit import transpile
 
 
 def random_sample(N: int) -> QuantumCircuit:

@@ -1,10 +1,15 @@
-import argparse, os
+import argparse
+import os
 from enum import Enum, auto
 from qiskit import transpile
 from qiskit_aer import AerSimulator
 from qiskit.visualization import plot_histogram
 import matplotlib.pyplot as plt
-import naiive, anticontrol, complement, main, exhaustive  # import exhaustive
+import naiive
+import anticontrol
+import complement
+import main
+import exhaustive  # import exhaustive
 
 
 class Version(Enum):
@@ -34,7 +39,7 @@ def run_simulation(N, version, shots):
 
     try:
         qc.draw("mpl").savefig(img_name, dpi=300)
-    except:
+    except Exception:
         pass
 
     sim = AerSimulator()
